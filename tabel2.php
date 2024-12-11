@@ -1,6 +1,25 @@
 <?php
-require 'functions.php';
-$apk = query ("SELECT *FROM todolistdb");
+//koneksi ke database
+$kon = mysqli_connect("localhost:3307", "root", "","todolist");
+//mengambil data dari tabel todolist
+$result = mysqli_query($kon, "SELECT * FROM todolistdb");
+
+if ($result) {
+    echo mysqli_error($kon);
+    echo "Tidak ada masalah bung";
+    echo "<br>";
+}
+
+//ambil data (fetch) todolistdb dari object result
+// mysqli_fetch_row() //mengembalikan array numerik
+// mysqli_fetch_assoc() //mengembalikan array associative
+// mysqli_fetch_array() //mengembalikan keduanya
+// mysqli_fetch_object() //mengembalikan dengan ->
+
+// while ($todo = mysqli_fetch_assoc($result)){
+//     var_dump($todo);
+// }
+
 
 ?>
 
@@ -23,7 +42,7 @@ $apk = query ("SELECT *FROM todolistdb");
         </tr>   
 
         <?php $i = 1; ?>
-        <?php foreach($apk as $todo) : ?>
+        <?php while($todo = mysqli_fetch_assoc($result)) : ?>
         <tr>
             <th><?= $i ?></th>
             <th><?= $todo["judul"]?></th>
@@ -32,7 +51,7 @@ $apk = query ("SELECT *FROM todolistdb");
             <th><?= $todo["statuss"] ?></th>
         </tr>
         <?php $i++; ?>
-        <?php endforeach; ?>
+        <?php endwhile; ?>
 
     </table>
 
