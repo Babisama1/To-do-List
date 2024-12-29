@@ -1,16 +1,14 @@
-<?php 
+<?php
 
-$localhost = "localhost:3307";
-$root = "root";
-$pass = "";
-$db_name = "todo-list";
+$host = "localhost:3306";
+$username = "root";
+$password = "";
+$db_name = "to_do_list";
 
-try {
-    $kon = new PDO("mysql:host=$localhost;dbname=$db_name",$root,$pass);
-    $kon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-}
-catch(PDOException $e) {
-    echo "Connection failed ". $e->getMessage();
+$mysqli = new mysqli($host, $username, $password, $db_name);
+
+if ($mysqli->connect_errno) {
+    die("Koneksi error" . $mysqli->connect_error);
 }
 
-?> 
+return $mysqli;
