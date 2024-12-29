@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up Page</title>
+  <style>
+    body {
+        background: linear-gradient(to bottom, #87CEFA, #FFFFFF, #87CEEB);
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: Arial, sans-serif;
+    }
+
+    .signup-box {
+        width: 400px;
+        padding: 40px;
+        background: rgba(0, 0, 0, 0.9);
+        box-shadow: 0 15px 25px rgba(0, 0, 0, 0.6);
+        border-radius: 10px;
+    }
+
+    .signup-box p {
+        margin: 0 0 30px;
+        color: #fff;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .signup-box .user-box {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    .signup-box .user-box input {
+        width: 100%;
+        padding: 10px 0;
+        color: #fff;
+        border: none;
+        border-bottom: 1px solid #fff;
+        outline: none;
+        background: transparent;
+        font-size: 16px;
+    }
+
+    .signup-box .user-box label {
+        position: absolute;
+        top: 0;
+        left: 0;
+        color: #fff;
+        pointer-events: none;
+        transition: 0.5s;
+    }
+
+    .signup-box .user-box input:focus ~ label,
+    .signup-box .user-box input:valid ~ label {
+        top: -20px;
+        font-size: 12px;
+        color: #87CEFA;
+    }
+
+    .signup-box a, .signup-box button {
+        position: relative;
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 20px;
+        color: #fff;
+        font-size: 16px;
+        text-decoration: none;
+        background: #87CEFA;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .signup-box a:hover, .signup-box button:hover {
+        background: #4682B4;
+    }
+
+    .signup-box p:last-child {
+        color: #aaa;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .signup-box a.a2 {
+        color: #87CEFA;
+        text-decoration: none;
+    }
+
+    .signup-box a.a2:hover {
+        color: #4682B4;
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-box">
+    <p>Sign Up</p>
+    <form action="proses-signup.php" method="post" novalidate>
+      <div class="user-box">
+        <input required type="text" id="nama" name="nama">
+        <label for="nama">Nama</label>
+      </div>
+      <div class="user-box">
+        <input required type="email" id="email" name="email">
+        <label for="email">Email</label>
+      </div>
+      <div class="user-box">
+        <input required type="password" id="password" name="password">
+        <label for="password">Password</label>
+      </div>
+      <div class="user-box">
+        <input required type="password" id="password_confirmation" name="password_confirmation">
+        <label for="password_confirmation">Repeat Password</label>
+      </div>
+      <button type="submit">Sign Up</button>
+    </form>
+  </div>
+</body>
+</html>
