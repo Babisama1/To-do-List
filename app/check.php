@@ -1,42 +1,33 @@
-<?php 
-    if (isset($_POST['id'])) {
-        require '../koneksi.php';
+@@ -0,0 +1,32 @@
+<?php
 
-        $id = $_POST['id'];
+if(isset($_POST['id'])){
+    require '../db_conn.php';
 
-        if (empty($id)) {
-            echo 'error';
-        } else {
-            // Use a prepared statement to fetch the todo item
-            $todos = $kon->prepare("SELECT id, cek FROM todos WHERE id = ?");
-            $todos->execute([$id]);
+    $id = $_POST['id'];
 
-            $todo = $todos->fetch();
+    if(empty($id)){
+       echo 'error';
+    }else {
+        $todos = $conn->prepare("SELECT id, checked FROM todos WHERE id=?");
+        $todos->execute([$id]);
 
-            if ($todo) {
-                $uId = $todo['id'];
-                $checked = $todo['cek'];
+        $todo = $todos->fetch();
+        $uId = $todo['id'];
+        $checked = $todo['checked'];
 
-                // Toggle the checked value (0 <-> 1)
-                $uChecked = $checked ? 0 : 1;
+        $uChecked = $checked ? 0 : 1;
 
-                // Update the status with prepared statements to prevent SQL injection
-                $update = $kon->prepare("UPDATE todos SET cek = ? WHERE id = ?");
-                $update->execute([$uChecked, $uId]);
+        $res = $conn->query("UPDATE todos SET checked=$uChecked WHERE id=$uId");
 
-                if ($update) {
-                    echo $uChecked; // Output the new "checked" value (0 or 1)
-                } else {
-                    echo "error";
-                }
-            } else {
-                echo "error"; // Handle case when the todo item isn't found
-            }
-
-            $kon = null;
-            exit();
+        if($res){
+            echo $checked;
+        }else {
+            echo "error";
         }
-    } else {
-        header("Location: ../index.php?mess=error");
+        $conn = null;
+        exit();
     }
-?>
+}else {
+    header("Location: ../index.php?mess=error");
+}

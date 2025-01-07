@@ -1,26 +1,24 @@
-<?php 
+<?php
 
-    if (isset($_POST['judul'])) {
-        require '../koneksi.php';
+if(isset($_POST['title'])){
+    require '../db_conn.php';
 
-        $judul = $_POST['judul'];
+    $title = $_POST['title'];
 
-        if (empty($judul)){
-            header("Location: ../index.php?mess=error");
-        } else {
-            $stmt = $kon->prepare("INSERT INTO todos(judul) VALUE(?)");
-            $res = $stmt->execute([$judul]);
-
-            if ($res) {
-                header("Location: ../index.php?mess=success");
-            }else {
-                header("Location: ../index.php");
-            }
-            $kon = null;
-            exit();
-        }
-    }else {
+    if(empty($title)){
         header("Location: ../index.php?mess=error");
-    }
+    }else {
+        $stmt = $conn->prepare("INSERT INTO todos(title) VALUE(?)");
+        $res = $stmt->execute([$title]);
 
-?>
+        if($res){
+            header("Location: ../index.php?mess=success"); 
+        }else {
+            header("Location: ../index.php");
+        }
+        $conn = null;
+        exit();
+    }
+}else {
+    header("Location: ../index.php?mess=error");
+}
