@@ -38,6 +38,7 @@ require 'db_conn.php';
                     <div class="empty">
                         <img src="img/gambarTodoList.png" width="100%" />
                         <img src="img/loading1.gif" width="300px">
+
                     </div>
                 </div>
             <?php } ?>
